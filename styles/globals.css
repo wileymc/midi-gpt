@@ -38,6 +38,14 @@ body {
 
 /* Custom midi-player styles */
 
+a {
+  @apply text-teal-300;
+}
+
+#player {
+  max-width: calc(100vw - 5px);
+}
+
 #player midi-player {
   @apply bg-teal-400/50 border border-teal-500/50 rounded-tl-lg rounded-tr-lg p-1;
   display: block;

@@ -16,8 +16,9 @@ export default async function handler(
 ): Promise<void> {
   const { inputValue, instrumentKey = 1, tempo = 120 } = req.body;
   const prompt = `You are a midi composer. Given the following description, please generate a midi sequence.  
-                  It is possible to play multple notes at the same time.
-                  Output the midi sequence as an array of events in time with the format '{ pitch: ["E4", "D4"], duration: "4" }'.                 
+                  It is possible to play multiple notes at the same time.
+                  Output the midi sequence as an array of events in time with the FORMAT '{ pitch: ["E4", "D4"], duration: "4", velocity: "100" }'.
+                  Vary the duration, pitch, and velocity of the notes to create a more interesting sequence.                 
                   Output nothing but JSON in this format, if you cannot do so respond "FAIL". Description: ${inputValue}`;
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: prompt }],
@@ -28,13 +29,14 @@ export default async function handler(
   const midiSequence = parseCode(
     completion.choices[0].message.content as string
   );
-  console.log({ midiSequence });
   const parsedMidiSequence = JSON.parse(midiSequence);
   let events = parsedMidiSequence?.map(
     (event: MidiEvent) => new MidiWriter.NoteEvent(event)
   );
 
   const track = new MidiWriter.Track();
+
+  track.polyModeOn();
 
   // Define an instrument (optional):
   track.addEvent(
