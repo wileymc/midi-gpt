@@ -59,7 +59,7 @@ export default function Home() {
       console.error(error);
       // Handle error
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 1200);
     }
   };
 
@@ -72,8 +72,7 @@ export default function Home() {
       <aside className="h-full flex flex-col col-span-1 order-last md:order-first p-8">
         <form onSubmit={handleSubmit} className="space-y-4">
           <SectionHeader
-            title="Describe a melody, chord sequence, or anything musical that
-                you'd like to generate as MIDI"
+            title="Describe a melody, chord sequence, or pattern to generate as MIDI"
             stepNumber={1}
           />
           <textarea
@@ -84,7 +83,7 @@ export default function Home() {
             onChange={handleChange}
             required
             autoFocus
-            className="w-full p-3 rounded border border-stone-600 bg-stone-900 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+            className="w-full p-3 rounded bg-zinc-900 hover:ring-teal-300/70 focus:ring-teal-300/70 ring-2 ring-teal-300/30 ring-inset focus:outline-none transition-border"
           />
           <button type="submit" className={`btn-primary`}>
             Generate a MIDI file
@@ -106,13 +105,13 @@ export default function Home() {
             style={{ backgroundSize: "cover" }}
           />
           {loading && <ScaleLoader color="#38B2AC" />}
-          {midiFile && (
+          {!loading && midiFile && (
             <section id="player">
               {/* @ts-ignore */}
               <midi-player
                 src={midiFile}
                 sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus"
-                visualizer="#midi-visualizer"
+                visualizer="midi-visualizer"
               />
               {/* @ts-ignore */}
               <midi-visualizer

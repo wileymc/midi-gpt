@@ -33,7 +33,7 @@ body {
 }
 
 .btn-primary {
-  @apply bg-teal-600 hover:bg-teal-700 text-white  py-1 px-2 rounded-full transition-all border border-teal-400/50;
+  @apply bg-gradient-to-r from-teal-600 to-teal-700 hover:bg-gradient-to-r hover:from-teal-700 hover:to-teal-800 text-white py-1 px-2 rounded-full transition-all border border-teal-400/50;
 }
 
 /* Custom midi-player styles */

@@ -13,9 +13,14 @@ export function Nav() {
       </div>
       <div>
         <button
-          className={`bg-teal-500 hover:bg-teal-700 text-white  py-1 px-2 rounded-full transition-all`}
+          className={`flex items-center justify-betweenbg-zinc-700 border border-teal-800 hover:bg-teal-600 text-white px-2 rounded transition-all uppercase text-sm h-8`}
         >
-          Buy Credits
+          <span
+            className={`text-xs bg-teal-700 text-white px-2 py-1 rounded-full mr-2`}
+          >
+            3
+          </span>
+          Credits
         </button>
       </div>
     </nav>
