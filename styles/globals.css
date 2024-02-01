@@ -33,7 +33,7 @@ body {
 }
 
 .btn-primary {
-  @apply bg-teal-700 text-white py-1 px-2 rounded-full transition-all border border-teal-400/50 hover:border-teal-300/50 hover:bg-teal-500/50;
+  @apply bg-teal-700 text-white py-1 px-2 rounded-full transition-all border border-teal-300 hover:border-teal-300/50 hover:bg-teal-500/50 flex justify-center gap-4 items-center;
 }
 
 /* Custom midi-player styles */
@@ -87,5 +87,5 @@ body {
 #player midi-visualizer svg rect.note.active {
   opacity: 0.9;
   stroke: #003531;
-  fill: rgb(217, 27, 106);
+  fill: rgb(101, 248, 251);
 }
