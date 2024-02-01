@@ -9,11 +9,12 @@ import {
   Button,
   SearchSelect,
   SearchSelectItem,
+  Badge,
 } from "@tremor/react";
 import Script from "next/script";
 import { useState } from "react";
 import { ScaleLoader } from "react-spinners";
-import { MusicalNoteIcon } from "@heroicons/react/24/solid";
+import { HeartIcon, MusicalNoteIcon } from "@heroicons/react/24/solid";
 import soundfont from "../public/soundfont.json";
 import { titleCase } from "@/lib/strings";
 
@@ -169,7 +170,7 @@ export default function Home() {
               <midi-player
                 src={midiFile}
                 sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus"
-                visualizer="#midi-visualizer"
+                visualizer="midi-visualizer"
               />
               {/* @ts-ignore */}
               <midi-visualizer
@@ -179,6 +180,9 @@ export default function Home() {
               />
             </section>
           )}
+          <div className="absolute bottom-0 right-0 m-2">
+            <Badge icon={HeartIcon}>Polyphonic MIDI files coming soon...</Badge>
+          </div>
         </div>
       </div>
       <Script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0" />
