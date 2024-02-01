@@ -2,6 +2,10 @@ import type { Config } from "tailwindcss";
 const colors = require("tailwindcss/colors");
 
 const config: Config = {
+  mode: "jit",
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,12 +13,9 @@ const config: Config = {
     "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}", // Tremor module
   ],
   theme: {
+    transparent: "transparent",
+    current: "currentColor",
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
         // light mode
         tremor: {
@@ -70,7 +71,7 @@ const config: Config = {
           },
           content: {
             subtle: colors.teal[800],
-            DEFAULT: colors.zinc[500],
+            DEFAULT: colors.zinc[300],
             emphasis: colors.zinc[200],
             strong: colors.zinc[50],
             inverted: colors.zinc[950],

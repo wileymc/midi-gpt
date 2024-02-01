@@ -207,10 +207,11 @@ export default function Home() {
         <div className="py-2">
           <Divider />
         </div>
+        <SectionHeader title="Download your MIDI file" stepNumber={3} />
         {midiFile && (
           <button
             type="button"
-            className="btn-primary w-full mt-2"
+            className="btn-primary w-full mt-4"
             onClick={handleDownload}
             disabled={!midiFile}
           >
@@ -219,7 +220,6 @@ export default function Home() {
           </button>
         )}
         <aside className="flex flex-col justify-between h-full">
-          {/* Existing code */}
           <div></div>
           <Dialog
             open={isDialogOpen}
@@ -228,11 +228,14 @@ export default function Home() {
           >
             <DialogPanel>
               <Title className="mb-3 flex gap-2">
-                <InformationCircleIcon width={24} className="text-teal-500" />
+                <InformationCircleIcon
+                  width={24}
+                  className="text-teal-500/80"
+                />
                 Information
               </Title>
               <div>
-                <Text color="neutral-300">
+                <Text>
                   Thanks for visiting MIDIgpt! This is a simple but powerful web
                   app that leverages a ton of open source libraries and APIs to
                   generate MIDI files from text prompts. It is deeply inspired
@@ -241,7 +244,7 @@ export default function Home() {
                     ChartGPT
                   </a>
                 </Text>
-                <Text color="neutral-300 mt-2">
+                <Text className="mt-2">
                   The MIDI concepts are generated using the GPT-3.5 model from
                   OpenAI, and the MIDI files are generated using the{" "}
                   <a href="https://github.com/grimmdude/MidiWriterJS">
@@ -253,18 +256,18 @@ export default function Home() {
                   </a>{" "}
                   library. The app is built using{" "}
                   <a href="https://nextjs.org/">Next.js</a>,{" "}
-                  <a href="https://tailwindcss.com/">Tailwind CSS</a>, and
+                  <a href="https://tailwindcss.com/">Tailwind CSS</a>, and{" "}
                   <a href="https://tremor.so">Tremor</a>, and is hosted on{" "}
                   <a href="https://vercel.com/">Vercel</a>.
                 </Text>
-                <Text color="neutral-300 mt-2">
+                <Text className="mt-2">
                   The app is open source and the code is available on GitHub. If
                   you have any questions or feedback, feel free to reach out to
                   me on <a href="twitter.com/wileymckayconte">Twitter</a> or{" "}
                   <a href="github.com/wileymc">GitHub</a>. Enjoy!
                 </Text>
-                <Divider className="my-4" color="teal" />
-                <Text color="neutral-300">
+                <Divider className="my-4" />
+                <Text>
                   I am currently working on training a proprietary model to
                   generate higher quality MIDI files from text prompts. If you
                   are interested in contributing, please reach out to me.
@@ -273,7 +276,7 @@ export default function Home() {
             </DialogPanel>
           </Dialog>
           <button
-            className="btn-primary w-fit mt-2"
+            className="bg-teal-500 rounded-full w-fit mt-2 hover:ring-2 hover:ring-teal-500/50 transition-all"
             onClick={() => setDialogOpen(true)}
           >
             <InformationCircleIcon width={24} />

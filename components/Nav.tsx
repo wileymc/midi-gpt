@@ -34,7 +34,7 @@ export function Nav() {
                 onClick={() => setDialogOpen(false)}
               />
             </div>
-            <Title className="mb-3">Add Credits to Generate more MIDI</Title>
+            <Title className="mb-3">Add credits to generate more MIDI</Title>
             <Text>
               You have <span className="text-teal-300">{creditsRemaining}</span>{" "}
               credits remaining.
