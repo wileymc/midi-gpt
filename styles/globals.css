@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.btn-primary {
+  @apply bg-teal-600 hover:bg-teal-700 text-white  py-1 px-2 rounded-full transition-all border border-teal-400/50;
+}
+
+/* Custom midi-player styles */
+
+#player midi-player {
+  @apply bg-teal-900 border border-teal-500/50 rounded-tl-lg rounded-tr-lg;
+  display: block;
+  width: inherit;
+  margin: 4px;
+  margin-bottom: 0;
+}
+#player midi-player::part(control-panel) {
+  @apply bg-teal-900 border border-teal-700/50;
+}
+#player midi-player::part(play-button) {
+  @apply bg-teal-500;
+}
+#player midi-player::part(play-button):hover {
+  @apply bg-teal-400;
+}
+#player midi-player::part(time) {
+  font-family: monospace;
+}
+
+#player midi-player::part(seek-bar) {
+  @apply accent-teal-200;
+}
+
+/* Custom visualizer style */
+#player midi-visualizer .piano-roll-visualizer {
+  @apply bg-teal-900 rounded-bl-lg rounded-br-lg border border-teal-500/50;
+  overflow: auto;
+  margin: 0 4px;
+}
+#player midi-visualizer svg rect.note {
+  opacity: 0.6;
+  stroke-width: 2;
+}
+#player midi-visualizer svg rect.note[data-instrument="0"] {
+  fill: rgb(238, 138, 216);
+  stroke: rgb(217, 27, 106);
+}
+#player midi-visualizer svg rect.note[data-instrument="2"] {
+  fill: #2ee;
+  stroke: #055;
+}
+#player midi-visualizer svg rect.note[data-is-drum="true"] {
+  fill: #888;
+  stroke: #888;
+}
+#player midi-visualizer svg rect.note.active {
+  opacity: 0.9;
+  stroke: #003531;
+  fill: rgb(217, 27, 106);
+}
