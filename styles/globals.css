@@ -33,13 +33,13 @@ body {
 }
 
 .btn-primary {
-  @apply bg-gradient-to-r from-teal-600 to-teal-700 hover:bg-gradient-to-r hover:from-teal-700 hover:to-teal-800 text-white py-1 px-2 rounded-full transition-all border border-teal-400/50;
+  @apply bg-teal-700 text-white py-1 px-2 rounded-full transition-all border border-teal-400/50 hover:border-teal-300/50 hover:bg-teal-500/50;
 }
 
 /* Custom midi-player styles */
 
 #player midi-player {
-  @apply bg-teal-900 border border-teal-500/50 rounded-tl-lg rounded-tr-lg;
+  @apply bg-teal-400/50 border border-teal-500/50 rounded-tl-lg rounded-tr-lg p-1;
   display: block;
   width: inherit;
   margin: 4px;

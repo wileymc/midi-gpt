@@ -7,9 +7,11 @@ export function Nav() {
         <img
           src="https://www.svgrepo.com/show/217552/keyboard-piano.svg"
           alt="Keyboard Piano"
-          style={{ height: "35px" }}
+          style={{ height: "36px" }}
         />
-        <h3 className={`font-mono text-sm`}>MidiGPT</h3>
+        <h3 className={`font-mono text-sm`}>
+          MIDI<strong>gpt</strong>
+        </h3>
       </div>
       <div>
         <button
