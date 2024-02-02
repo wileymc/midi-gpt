@@ -151,7 +151,7 @@ export default function Home() {
             <Divider />
           </div>
           <SectionHeader
-            title="Adjust parameters for your new midi file as needed"
+            title="Adjust optional MIDI parameters as needed"
             stepNumber={2}
           />
           <div className="space-y-4">

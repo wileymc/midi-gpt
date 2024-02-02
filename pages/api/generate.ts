@@ -18,7 +18,26 @@ export default async function handler(
   const prompt = `You are a midi composer. Given the following description, please generate a midi sequence.  
                   It is possible to play multiple notes at the same time.
                   Output the midi sequence as an array of events in time with the FORMAT '{ pitch: ["E4", "D4"], duration: "4", velocity: "100" }'.
-                  Vary the duration, pitch, and velocity of the notes to create a more interesting sequence.                 
+                  Pitch values can only string notes from C0 to G10.
+                  Duration values can only be: 
+                  1 : whole
+                  2 : half
+                  d2 : dotted half
+                  dd2 : double dotted half
+                  4 : quarter
+                  4t : quarter triplet
+                  d4 : dotted quarter
+                  dd4 : double dotted quarter
+                  8 : eighth
+                  8t : eighth triplet
+                  d8 : dotted eighth
+                  dd8 : double dotted eighth
+                  16 : sixteenth
+                  16t : sixteenth triplet
+                  32 : thirty-second
+                  64 : sixty-fourth
+                  Tn : where n is an explicit number of ticks (T128 = 1 beat)
+                  Velocity values can only be between 0 and 100.
                   Output nothing but JSON in this format, if you cannot do so respond "FAIL". Description: ${inputValue}`;
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: prompt }],
