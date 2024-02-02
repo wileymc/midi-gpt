@@ -242,7 +242,9 @@ export default function Home() {
                   by{" "}
                   <a href="https://github.com/whoiskatrin/chart-gpt">
                     ChartGPT
-                  </a>
+                  </a>{" "}
+                  which is an awesome library for generating charts from text
+                  prompts.
                 </Text>
                 <Text className="mt-2">
                   The MIDI concepts are generated using the GPT-3.5 model from
@@ -270,7 +272,11 @@ export default function Home() {
                 <Text>
                   I am currently working on training a proprietary model to
                   generate higher quality MIDI files from text prompts. If you
-                  are interested in contributing, please reach out to me.
+                  are interested in contributing, please{" "}
+                  <a href="mailto:me+midigpt@wileymc.com">
+                    get in touch with me
+                  </a>
+                  .
                 </Text>
               </div>
             </DialogPanel>
