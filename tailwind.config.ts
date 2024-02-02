@@ -23,7 +23,7 @@ const config: Config = {
             faint: colors.zinc[50],
             muted: colors.zinc[200],
             subtle: colors.zinc[400],
-            DEFAULT: colors.zinc[500],
+            DEFAULT: colors.red[500],
             emphasis: colors.zinc[700],
             inverted: colors.white,
           },
@@ -70,7 +70,7 @@ const config: Config = {
             DEFAULT: colors.zinc[800],
           },
           content: {
-            subtle: colors.teal[800],
+            subtle: colors.zinc[800],
             DEFAULT: colors.zinc[300],
             emphasis: colors.zinc[200],
             strong: colors.zinc[50],

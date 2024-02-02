@@ -8,24 +8,17 @@ import {
   Text,
   SearchSelect,
   SearchSelectItem,
-  Badge,
   Switch,
-  Icon,
-  Title,
 } from "@tremor/react";
-import Script from "next/script";
 import { useEffect, useState } from "react";
 import { ScaleLoader } from "react-spinners";
-import {
-  HeartIcon,
-  InformationCircleIcon,
-  MusicalNoteIcon,
-} from "@heroicons/react/24/solid";
+import { MusicalNoteIcon } from "@heroicons/react/24/solid";
 import soundfont from "../public/soundfont.json";
 import { titleCase } from "@/lib/strings";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
-import { Dialog, DialogPanel } from "@tremor/react";
 import Head from "next/head";
+import Information from "@/components/Information";
+import { useCreditStore } from "@/lib/store";
 
 const SectionHeader = ({
   stepNumber,
@@ -51,7 +44,7 @@ export default function Home() {
   const [shouldLoop, setShouldLoop] = useState(false);
   const [midiFile, setMidiFile] = useState<string | null>(null);
   const [isLoading, setLoading] = useState(false);
-  const [isDialogOpen, setDialogOpen] = useState(false);
+  const decrementCredits = useCreditStore((state) => state.decrement);
 
   useEffect(() => {
     let existingFile = localStorage.getItem("midiFile");
@@ -87,11 +80,9 @@ export default function Home() {
       let uri = json.uri;
       setMidiFile(uri);
       localStorage.setItem("midiFile", uri);
-
-      // Do something with the generated MIDI file
+      decrementCredits();
     } catch (error) {
       console.error(error);
-      // Handle error
     } finally {
       setTimeout(() => setLoading(false), 1200);
     }
@@ -227,106 +218,38 @@ export default function Home() {
               Download MIDI
             </button>
           )}
-          <aside className="flex flex-col justify-between h-full">
-            <div></div>
-            <Dialog
-              open={isDialogOpen}
-              onClose={(val) => setDialogOpen(val)}
-              static={true}
-            >
-              <DialogPanel>
-                <Title className="mb-3 flex gap-2">
-                  <InformationCircleIcon
-                    width={24}
-                    className="text-teal-500/80"
-                  />
-                  Information
-                </Title>
-                <div>
-                  <Text>
-                    Thanks for visiting MIDIgpt! This is a simple but powerful
-                    web app that leverages a ton of open source libraries and
-                    APIs to generate MIDI files from text prompts. It is deeply
-                    inspired by{" "}
-                    <a href="https://github.com/whoiskatrin/chart-gpt">
-                      ChartGPT
-                    </a>{" "}
-                    which is an awesome library for generating charts from text
-                    prompts.
-                  </Text>
-                  <Text className="mt-2">
-                    The MIDI concepts are generated using the GPT-3.5 model from
-                    OpenAI, and the MIDI files are generated using the{" "}
-                    <a href="https://github.com/grimmdude/MidiWriterJS">
-                      MidiWriterJS
-                    </a>{" "}
-                    library. The midi preview and visualizer are using the{" "}
-                    <a href="https://github.com/cifkao/html-midi-player/">
-                      html-midi-player
-                    </a>{" "}
-                    library. The app is built using{" "}
-                    <a href="https://nextjs.org/">Next.js</a>,{" "}
-                    <a href="https://tailwindcss.com/">Tailwind CSS</a>, and{" "}
-                    <a href="https://tremor.so">Tremor</a>, and is hosted on{" "}
-                    <a href="https://vercel.com/">Vercel</a>.
-                  </Text>
-                  <Text className="mt-2">
-                    The app is open source and the code is available on GitHub.
-                    If you have any questions or feedback, feel free to reach
-                    out to me on{" "}
-                    <a href="twitter.com/wileymckayconte">Twitter</a> or{" "}
-                    <a href="github.com/wileymc">GitHub</a>. Enjoy!
-                  </Text>
-                  <Divider className="my-4" />
-                  <Text>
-                    I am currently working on training a proprietary model to
-                    generate higher quality MIDI files from text prompts. If you
-                    are interested in contributing, please{" "}
-                    <a href="mailto:me+midigpt@wileymc.com">
-                      get in touch with me
-                    </a>
-                    .
-                  </Text>
-                </div>
-              </DialogPanel>
-            </Dialog>
-            <button
-              className="bg-teal-100 rounded-full w-fit mt-2 hover:ring-2 hover:ring-teal-400/50 transition-all"
-              onClick={() => setDialogOpen(true)}
-            >
-              <InformationCircleIcon width={24} color="teal" />
-            </button>
-          </aside>
         </aside>
 
         <div className="flex flex-col justify-between lg:col-span-2 col-span-2 md:py-8 md:pr-8">
-          <div className="w-full max-w-full h-full min-h-max rounded relative flex justify-center items-center border border-teal-800/50">
-            <div className="w-full max-w-full h-full p-3 md:p-4 rounded bg-[url('/studio-bg.png')] opacity-15 backdrop-filter grayscale absolute top-0 left-0 z-0 bg-cover pointer-events-auto" />
-            {isLoading && (
-              <ScaleLoader color="#38B2AC" height={120} width={12} />
-            )}
-            {!isLoading && midiFile && (
-              <section className="z-1 p-4">
-                <div id="player">
-                  {/* @ts-ignore */}
-                  <midi-player
-                    src={midiFile}
-                    sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus"
-                    visualizer="#midi-visualizer"
-                    tempo={tempo}
-                  />
-                  {/* @ts-ignore */}
-                  <midi-visualizer
-                    type="piano-roll"
-                    id="midi-visualizer"
-                    src={midiFile}
-                  />
-                </div>
-              </section>
-            )}
+          <div className="w-full max-w-full h-full min-h-max rounded relative flex justify-between flex-col items-center border border-teal-800/50">
+            <div className="w-full max-w-full h-full rounded bg-[url('/studio-bg.png')] opacity-15 backdrop-filter grayscale absolute top-0 left-0 z-0 bg-cover pointer-events-auto" />
+            <div className="h-8" />
+            <div>
+              {isLoading && <ScaleLoader color="#38B2AC" />}
+              {!isLoading && midiFile && (
+                <section className="z-1 p-4">
+                  <div id="player">
+                    {/* @ts-ignore */}
+                    <midi-player
+                      src={midiFile}
+                      sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus"
+                      visualizer="#myVisualizer"
+                    />
+                    {/* @ts-ignore */}
+                    <midi-visualizer
+                      type="piano-roll"
+                      src={midiFile}
+                      id="myVisualizer"
+                    />
+                  </div>
+                </section>
+              )}
+            </div>
+            <div className={`flex w-full justify-end p-2 z-10`}>
+              <Information />
+            </div>
           </div>
         </div>
-        <Script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0" />
       </div>
     </>
   );

@@ -1,11 +1,13 @@
+import { useCreditStore } from "@/lib/store";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { Button, Dialog, DialogPanel, Text, Title } from "@tremor/react";
+import { Dialog, DialogPanel, Text, Title } from "@tremor/react";
 import Script from "next/script";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Nav() {
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [creditsRemaining, setCreditsRemaining] = useState(3);
+  const creditsRemaining = useCreditStore((state) => state.credits);
+
   return (
     <nav
       className={`flex flex-row justify-between items-center w-full p-2 px-4 border-b h-[48px] bg-zinc-200 border-zinc-300 dark:bg-zinc-950 dark:border-zinc-700 transition-all`}
@@ -49,17 +51,19 @@ export function Nav() {
             </div>
           </DialogPanel>
         </Dialog>
-        <button
-          className={`flex items-center gap-1 text-sm dark:text-zinc-300 dark:hover:text-teal-300 transition-all border hover:ring-1 ring-teal-400 border-teal-500 dark:border-teal-300 rounded-md px-2 py-0.5`}
-          onClick={() => setDialogOpen(true)}
-        >
-          <span
-            className={`text-xs thin bg-teal-700 text-white w-4 h-4 rounded-full mr-2 flex items-center justify-center`}
+        <div className="flex justify-end items-center gap-2">
+          <button
+            className={`flex items-center gap-1 text-sm dark:text-zinc-300 dark:hover:text-teal-300 transition-all border hover:ring-1 ring-teal-400 border-teal-500 dark:border-teal-300 rounded-md px-2 py-0.5`}
+            onClick={() => setDialogOpen(true)}
           >
-            3
-          </span>
-          Credits
-        </button>
+            <span
+              className={`text-xs thin bg-teal-700 text-white w-4 h-4 rounded-full mr-2 flex items-center justify-center`}
+            >
+              {creditsRemaining}
+            </span>
+            Credits
+          </button>
+        </div>
       </div>
     </nav>
   );
