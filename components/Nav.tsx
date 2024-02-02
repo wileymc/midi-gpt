@@ -59,7 +59,7 @@ export function Nav() {
             onClick={() => setCreditsMenuOpen(true)}
           >
             <span
-              className={`text-xs thin bg-teal-700 text-white w-4 h-4 rounded-full mr-2 flex items-center justify-center`}
+              className={`text-xs thin bg-teal-700 text-white min-w-4 min-h-4 px-1 rounded-full mr-2 flex items-center justify-center`}
             >
               {creditsRemaining}
             </span>
