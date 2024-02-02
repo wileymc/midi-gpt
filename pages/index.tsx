@@ -293,7 +293,7 @@ export default function Home() {
       <div className="flex flex-col justify-between lg:col-span-2 col-span-2 md:py-8 md:pr-8">
         <div className="w-full max-w-full h-full min-h-max rounded relative flex justify-center items-center border border-teal-800/50">
           <div className="w-full max-w-full h-full p-3 md:p-4 rounded bg-[url('/studio-bg.png')] opacity-15 backdrop-filter grayscale absolute top-0 left-0 z-0 bg-cover pointer-events-auto" />
-          {isLoading && <ScaleLoader color="#38B2AC" />}
+          {isLoading && <ScaleLoader color="#38B2AC" height={120} width={12} />}
           {!isLoading && midiFile && (
             <section className="z-1 p-4">
               <div id="player">
