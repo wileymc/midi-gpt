@@ -276,10 +276,10 @@ export default function Home() {
             </DialogPanel>
           </Dialog>
           <button
-            className="bg-teal-500 rounded-full w-fit mt-2 hover:ring-2 hover:ring-teal-500/50 transition-all"
+            className="bg-teal-100 rounded-full w-fit mt-2 hover:ring-2 hover:ring-teal-400/50 transition-all"
             onClick={() => setDialogOpen(true)}
           >
-            <InformationCircleIcon width={24} />
+            <InformationCircleIcon width={24} color="teal" />
           </button>
         </aside>
       </aside>

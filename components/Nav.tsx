@@ -1,5 +1,5 @@
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { Dialog, DialogPanel, Text, Title } from "@tremor/react";
+import { Button, Dialog, DialogPanel, Text, Title } from "@tremor/react";
 import Script from "next/script";
 import { useState } from "react";
 
@@ -8,7 +8,7 @@ export function Nav() {
   const [creditsRemaining, setCreditsRemaining] = useState(3);
   return (
     <nav
-      className={`flex flex-row justify-between items-center w-full bg-zinc-900 p-2 px-4 border-b border-zinc-600 h-[48px]`}
+      className={`flex flex-row justify-between items-center w-full p-2 px-4 border-b h-[48px] bg-zinc-200 border-zinc-300 dark:bg-zinc-950 dark:border-zinc-700 transition-all`}
     >
       <div className={`flex gap-2 items-center`}>
         <img
@@ -50,11 +50,11 @@ export function Nav() {
           </DialogPanel>
         </Dialog>
         <button
-          className={`flex items-center justify-betweenbg-zinc-700 border border-teal-800 hover:bg-teal-600 text-white px-2 rounded transition-all uppercase text-sm h-8`}
+          className={`flex items-center gap-1 text-sm dark:text-zinc-300 dark:hover:text-teal-300 transition-all border hover:ring-1 ring-teal-400 border-teal-500 dark:border-teal-300 rounded-md px-2 py-0.5`}
           onClick={() => setDialogOpen(true)}
         >
           <span
-            className={`text-xs bg-teal-700 text-white px-2 py-1 rounded-full mr-2`}
+            className={`text-xs thin bg-teal-700 text-white w-4 h-4 rounded-full mr-2 flex items-center justify-center`}
           >
             3
           </span>

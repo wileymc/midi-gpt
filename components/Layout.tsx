@@ -8,7 +8,7 @@ type LayoutProps = {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <main className={`h-[calc(100vh-48px)] overscroll-none`}>
+    <main className={`h-[calc(100vh-48px)]`}>
       <Nav />
       {children}
     </main>
