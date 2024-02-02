@@ -14,7 +14,8 @@ export const useCreditStore = create<CreditStore>()(
         credits: 3,
         increase: (by: number) =>
           set((state) => ({ credits: state.credits + by })),
-        decrement: () => set((state) => ({ credits: state.credits - 1 })),
+        decrement: () =>
+          set((state) => ({ credits: Math.max(state.credits - 1, 0) })),
       }),
       {
         name: "credits",
@@ -22,3 +23,13 @@ export const useCreditStore = create<CreditStore>()(
     )
   )
 );
+
+interface DialogueStore {
+  creditsMenuOpen: boolean;
+  setCreditsMenuOpen: (open: boolean) => void;
+}
+
+export const useDialogueStore = create<DialogueStore>((set) => ({
+  creditsMenuOpen: false,
+  setCreditsMenuOpen: (open: boolean) => set({ creditsMenuOpen: open }),
+}));

@@ -18,7 +18,7 @@ import { titleCase } from "@/lib/strings";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
 import Information from "@/components/Information";
-import { useCreditStore } from "@/lib/store";
+import { useCreditStore, useDialogueStore } from "@/lib/store";
 
 const SectionHeader = ({
   stepNumber,
@@ -44,7 +44,14 @@ export default function Home() {
   const [shouldLoop, setShouldLoop] = useState(false);
   const [midiFile, setMidiFile] = useState<string | null>(null);
   const [isLoading, setLoading] = useState(false);
-  const decrementCredits = useCreditStore((state) => state.decrement);
+  const { credits, decrementCredits } = useCreditStore((state) => ({
+    decrementCredits: state.decrement,
+    credits: state.credits,
+  }));
+  const { setCreditsMenuOpen } = useDialogueStore((state) => ({
+    creditsMenuOpen: state.creditsMenuOpen,
+    setCreditsMenuOpen: state.setCreditsMenuOpen,
+  }));
 
   useEffect(() => {
     let existingFile = localStorage.getItem("midiFile");
@@ -61,6 +68,12 @@ export default function Home() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (credits < 1) {
+      setCreditsMenuOpen(true);
+      return;
+    }
+
     setLoading(true);
 
     try {
