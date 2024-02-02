@@ -3,6 +3,7 @@ const colors = require("tailwindcss/colors");
 
 const config: Config = {
   mode: "jit",
+  important: true,
   future: {
     hoverOnlyWhenSupported: true,
   },
@@ -20,11 +21,11 @@ const config: Config = {
         // light mode
         tremor: {
           brand: {
-            faint: colors.zinc[50],
-            muted: colors.zinc[200],
-            subtle: colors.zinc[400],
-            DEFAULT: colors.red[500],
-            emphasis: colors.zinc[700],
+            faint: colors.teal[50],
+            muted: colors.teal[200],
+            subtle: colors.teal[400],
+            DEFAULT: colors.teal[500],
+            emphasis: colors.teal[700],
             inverted: colors.white,
           },
           background: {
@@ -70,8 +71,8 @@ const config: Config = {
             DEFAULT: colors.zinc[800],
           },
           content: {
-            subtle: colors.zinc[800],
-            DEFAULT: colors.zinc[500],
+            subtle: colors.zinc[600],
+            DEFAULT: colors.zinc[300],
             emphasis: colors.zinc[200],
             strong: colors.zinc[50],
             inverted: colors.zinc[950],

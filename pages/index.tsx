@@ -136,7 +136,7 @@ export default function Home() {
             <Textarea
               id="input"
               name="prompt"
-              className={`min-h-24`}
+              className={`min-h-24 dark:placeholder:text-dark-tremor-content-muted`}
               placeholder="Give me a funky thumping house bassline..."
               value={inputValue}
               onChange={handleChange}

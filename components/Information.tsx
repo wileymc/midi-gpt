@@ -7,7 +7,6 @@ export default function Information() {
 
   return (
     <>
-      {" "}
       <Dialog
         open={isDialogOpen}
         onClose={(val) => setDialogOpen(val)}
