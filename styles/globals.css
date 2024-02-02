@@ -49,8 +49,35 @@ a {
   margin: 0;
 }
 
+/* Custom visualizer style */
+#player midi-visualizer .piano-roll-visualizer {
+  @apply bg-teal-900 rounded-tl-lg rounded-tr-lg border border-teal-500/50;
+  overflow: auto;
+}
+#player midi-visualizer svg rect.note {
+  opacity: 0.9;
+  stroke-width: 1;
+}
+#player midi-visualizer svg rect.note[data-instrument="0"] {
+  fill: rgb(238, 230, 138);
+  stroke: rgb(217, 27, 106);
+}
+#player midi-visualizer svg rect.note[data-instrument="2"] {
+  fill: #2ee;
+  stroke: #055;
+}
+#player midi-visualizer svg rect.note[data-is-drum="true"] {
+  fill: #888;
+  stroke: #888;
+}
+#player midi-visualizer svg rect.note.active {
+  opacity: 1;
+  stroke: #003531;
+  fill: rgb(101, 248, 251);
+}
+
 #player midi-player {
-  @apply bg-teal-400/50 border border-teal-500/50 rounded-tl-lg rounded-tr-lg p-1;
+  @apply bg-teal-400/50 border border-teal-500/50 rounded-bl-lg rounded-br-lg p-1;
   display: block;
   width: inherit;
   margin: 0;
@@ -70,31 +97,4 @@ a {
 
 #player midi-player::part(seek-bar) {
   @apply accent-teal-200;
-}
-
-/* Custom visualizer style */
-#player midi-visualizer .piano-roll-visualizer {
-  @apply bg-teal-900 rounded-bl-lg rounded-br-lg border border-teal-500/50;
-  overflow: auto;
-}
-#player midi-visualizer svg rect.note {
-  opacity: 0.6;
-  stroke-width: 2;
-}
-#player midi-visualizer svg rect.note[data-instrument="0"] {
-  fill: rgb(238, 138, 216);
-  stroke: rgb(217, 27, 106);
-}
-#player midi-visualizer svg rect.note[data-instrument="2"] {
-  fill: #2ee;
-  stroke: #055;
-}
-#player midi-visualizer svg rect.note[data-is-drum="true"] {
-  fill: #888;
-  stroke: #888;
-}
-#player midi-visualizer svg rect.note.active {
-  opacity: 1;
-  stroke: #003531;
-  fill: rgb(101, 248, 251);
 }

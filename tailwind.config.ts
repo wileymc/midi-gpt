@@ -71,7 +71,7 @@ const config: Config = {
           },
           content: {
             subtle: colors.zinc[800],
-            DEFAULT: colors.zinc[300],
+            DEFAULT: colors.zinc[500],
             emphasis: colors.zinc[200],
             strong: colors.zinc[50],
             inverted: colors.zinc[950],

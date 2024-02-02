@@ -19,6 +19,7 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
 import Information from "@/components/Information";
 import { useCreditStore, useDialogueStore } from "@/lib/store";
+import MidiPreview from "@/components/MidiPreview";
 
 const SectionHeader = ({
   stepNumber,
@@ -59,12 +60,6 @@ export default function Home() {
       setMidiFile(existingFile);
     }
   }, []);
-
-  useEffect(() => {
-    if (shouldLoop)
-      document.querySelector("midi-player")?.setAttribute("loop", "true");
-    else document.querySelector("midi-player")?.removeAttribute("loop");
-  }, [shouldLoop]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -241,20 +236,7 @@ export default function Home() {
               {isLoading && <ScaleLoader color="#38B2AC" />}
               {!isLoading && midiFile && (
                 <section className="z-1 p-4">
-                  <div id="player">
-                    {/* @ts-ignore */}
-                    <midi-player
-                      src={midiFile}
-                      sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus"
-                      visualizer="#myVisualizer"
-                    />
-                    {/* @ts-ignore */}
-                    <midi-visualizer
-                      type="piano-roll"
-                      src={midiFile}
-                      id="myVisualizer"
-                    />
-                  </div>
+                  <MidiPreview midiFile={midiFile} shouldLoop={shouldLoop} />
                 </section>
               )}
             </div>
