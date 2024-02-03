@@ -127,8 +127,10 @@ export default function Home() {
       <Head>
         <title>MIDIgpt | Generate MIDI files from text in seconds</title>
       </Head>
-      <div className={`grid grid-cols-1 md:grid-cols-3 h-full p-9 gap-9`}>
-        <aside className="h-full flex flex-col col-span-1 order-last md:order-first">
+      <div
+        className={`grid grid-cols-1 md:grid-cols-3 h-full p-3 md:p-10 md:gap-10`}
+      >
+        <aside className="h-full flex flex-col col-span-1 mt-10 md:mt-0 order-last md:order-first">
           <form onSubmit={handleSubmit} className="space-y-4">
             <SectionHeader
               title="Describe a melody, chord sequence, or pattern to generate as MIDI"
