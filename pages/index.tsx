@@ -19,7 +19,7 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
 import Information from "@/components/Information";
 import { useCreditStore, useDialogueStore } from "@/lib/store";
-import MidiPreview from "@/components/MidiPreview";
+import { MidiPreview } from "@/components/MidiPreview";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const SectionHeader = ({

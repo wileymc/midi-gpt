@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Script from "next/script";
-import dynamic from "next/dynamic";
 
 declare global {
   namespace JSX {
@@ -11,7 +10,7 @@ declare global {
   }
 }
 
-function MidiPreview({
+export function MidiPreview({
   midiFile,
   shouldLoop,
 }: {
@@ -44,5 +43,3 @@ function MidiPreview({
     </div>
   );
 }
-
-export default dynamic(() => Promise.resolve(MidiPreview), { ssr: false });

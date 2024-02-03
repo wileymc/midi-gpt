@@ -42,7 +42,7 @@ a {
   stroke-width: 1;
 }
 #player midi-visualizer svg rect.note[data-instrument="0"] {
-  fill: rgb(238, 230, 138);
+  fill: rgb(255, 160, 194);
   stroke: rgb(217, 27, 106);
 }
 #player midi-visualizer svg rect.note[data-instrument="2"] {
