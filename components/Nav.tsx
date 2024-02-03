@@ -1,6 +1,7 @@
 import { useCreditStore, useDialogueStore } from "@/lib/store";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import { Dialog, DialogPanel, Text, Title } from "@tremor/react";
+import { useTheme } from "next-themes";
 import Script from "next/script";
 
 export function Nav() {
@@ -9,7 +10,7 @@ export function Nav() {
     setCreditsMenuOpen: state.setCreditsMenuOpen,
   }));
   const creditsRemaining = useCreditStore((state) => state.credits);
-
+  const { theme } = useTheme();
   return (
     <nav
       className={`flex flex-row justify-between items-center w-full p-2 px-4 border-b h-[48px] bg-zinc-200 border-zinc-300 dark:bg-zinc-950 dark:border-zinc-700 transition-all`}
@@ -47,7 +48,11 @@ export function Nav() {
               <Script async src="https://js.stripe.com/v3/pricing-table.js" />
               {/* @ts-ignore */}
               <stripe-pricing-table
-                pricing-table-id="prctbl_1Of7V1BDS22igUDjektIuC5m"
+                pricing-table-id={
+                  theme === "dark"
+                    ? "prctbl_1Of7V1BDS22igUDjektIuC5m"
+                    : "prctbl_1OfrFiBDS22igUDjVPs4p0Dq"
+                }
                 publishable-key="pk_live_51Of6RkBDS22igUDjuGhhLqxihN37zQn3G4FCXpcy8z1z9WnPjVPvPGKo8DscXAF9BQ9EadMj6f9555VvumHrVLfA0088T8vn7Y"
               />
             </div>
