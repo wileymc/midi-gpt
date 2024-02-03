@@ -20,6 +20,7 @@ import Head from "next/head";
 import Information from "@/components/Information";
 import { useCreditStore, useDialogueStore } from "@/lib/store";
 import MidiPreview from "@/components/MidiPreview";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const SectionHeader = ({
   stepNumber,
@@ -229,10 +230,10 @@ export default function Home() {
         </aside>
 
         <div className="flex flex-col justify-between lg:col-span-2 col-span-2 md:py-8 md:pr-8">
-          <div className="w-full max-w-full h-full min-h-max rounded relative flex justify-between flex-col items-center border border-teal-800/50">
+          <div className="w-full max-w-full h-full min-h-max rounded relative flex justify-between flex-col items-center border border-teal-800/50 z-1">
             <div className="w-full max-w-full h-full rounded bg-[url('/studio-bg.png')] opacity-15 backdrop-filter grayscale absolute top-0 left-0 z-0 bg-cover pointer-events-auto" />
             <div className="h-8" />
-            <div>
+            <div className="lg:min-w-[32rem]">
               {isLoading && <ScaleLoader color="#38B2AC" />}
               {!isLoading && midiFile && (
                 <section className="z-1 p-4">
@@ -240,7 +241,10 @@ export default function Home() {
                 </section>
               )}
             </div>
-            <div className={`flex w-full justify-end p-2 z-10`}>
+            <div
+              className={`flex w-full justify-end gap-4 items-baseline p-2 z-10`}
+            >
+              <ThemeToggle />
               <Information />
             </div>
           </div>

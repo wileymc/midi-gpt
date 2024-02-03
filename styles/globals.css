@@ -5,27 +5,6 @@
 body {
   margin: 0;
   height: 100vh;
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
 }
 
 @layer utilities {
@@ -35,7 +14,11 @@ body {
 }
 
 .btn-primary {
-  @apply bg-teal-500 text-white py-1 px-2 rounded-full transition-all border border-teal-700 hover:border-teal-800 hover:bg-teal-600 flex justify-center gap-4 items-center;
+  @apply bg-teal-500 text-white py-1 px-2 rounded-full transition-all border border-teal-600 hover:border-teal-800 hover:bg-teal-600 flex justify-center gap-4 items-center z-10;
+}
+
+.btn-secondary {
+  @apply bg-transparent text-teal-400 py-1 px-2 rounded-full transition-all border border-teal-200 hover:border-teal-300 hover:bg-teal-200 flex justify-center gap-4 items-center;
 }
 
 /* Custom midi-player styles */
@@ -51,7 +34,7 @@ a {
 
 /* Custom visualizer style */
 #player midi-visualizer .piano-roll-visualizer {
-  @apply bg-teal-900 rounded-tl-lg rounded-tr-lg border border-teal-500/50;
+  @apply bg-teal-500/50 dark:bg-teal-900 rounded-tl-lg rounded-tr-lg border border-teal-500/50;
   overflow: auto;
 }
 #player midi-visualizer svg rect.note {
@@ -77,13 +60,13 @@ a {
 }
 
 #player midi-player {
-  @apply bg-teal-400/50 border border-teal-500/50 rounded-bl-lg rounded-br-lg p-1;
+  @apply bg-teal-700/50 dark:bg-teal-400/50 border border-teal-500/50 rounded-bl-lg rounded-br-lg p-1;
   display: block;
   width: inherit;
   margin: 0;
 }
 #player midi-player::part(control-panel) {
-  @apply bg-teal-900 border border-teal-700/50;
+  @apply bg-teal-700 dark:bg-teal-900 border border-teal-700/50;
 }
 #player midi-player::part(play-button) {
   @apply bg-teal-500;

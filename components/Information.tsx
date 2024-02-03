@@ -1,4 +1,4 @@
-import { Dialog, DialogPanel, Title, Text, Divider } from "@tremor/react";
+import { Dialog, DialogPanel, Title, Text, Divider, Icon } from "@tremor/react";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
@@ -57,12 +57,16 @@ export default function Information() {
           </div>
         </DialogPanel>
       </Dialog>
-      <button
-        className="bg-teal-100 rounded-full w-fit mt-2 hover:ring-2 hover:ring-teal-400/50 transition-all"
-        onClick={() => setDialogOpen(true)}
-      >
-        <InformationCircleIcon width={24} color="teal" />
-      </button>
+      <div className="cursor-pointer ">
+        <Icon
+          icon={InformationCircleIcon}
+          color="teal"
+          variant="solid"
+          tooltip="Information"
+          size="sm"
+          onClick={() => setDialogOpen(true)}
+        />
+      </div>
     </>
   );
 }

@@ -4,6 +4,7 @@ const colors = require("tailwindcss/colors");
 const config: Config = {
   mode: "jit",
   important: true,
+  darkMode: "class",
   future: {
     hoverOnlyWhenSupported: true,
   },
