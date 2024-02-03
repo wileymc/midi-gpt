@@ -17,7 +17,7 @@ export default async function handler(
   const { inputValue, instrumentKey = 1, tempo = 120 } = req.body;
   const prompt = `You are a midi composer. Given the following description, please generate a midi sequence.  
                   It is possible to play multiple notes at the same time.
-                  Output the midi sequence as an array of events in time with the FORMAT '{ pitch: ["E4", "D4"], duration: "4", velocity: "100" }'.
+                  Output the midi sequence as an array of events in time with the FORMAT '{ pitch: ["E4", "D4"], duration: "4t", velocity: "100" }'.
                   Pitch values can only string notes from C0 to G10.
                   Duration values can only be: 
                   1 : whole

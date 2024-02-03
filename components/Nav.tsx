@@ -13,7 +13,7 @@ export function Nav() {
   const { theme } = useTheme();
   return (
     <nav
-      className={`flex flex-row justify-between items-center w-full p-2 px-4 border-b h-[48px] bg-zinc-200 border-zinc-300 dark:bg-zinc-950 dark:border-zinc-700 transition-all`}
+      className={`flex flex-row justify-between items-center w-full p-3 border-b h-[48px] bg-zinc-200 border-zinc-300 dark:bg-zinc-950 dark:border-zinc-700 transition-all`}
     >
       <div className={`flex gap-2 items-center`}>
         <img
@@ -32,7 +32,7 @@ export function Nav() {
           static={true}
         >
           <DialogPanel className={`lg:max-w-[64rem]`}>
-            <div className="flex justify-end">
+            <div className="absolute top-0 right-0 p-3">
               <XCircleIcon
                 width={20}
                 className="text-teal-600 cursor-pointer hover:text-teal-400 transition-all"

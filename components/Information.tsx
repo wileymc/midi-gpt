@@ -1,5 +1,5 @@
 import { Dialog, DialogPanel, Title, Text, Divider, Icon } from "@tremor/react";
-import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { InformationCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
 export default function Information() {
@@ -13,6 +13,13 @@ export default function Information() {
         static={true}
       >
         <DialogPanel>
+          <div className="absolute top-0 right-0 p-3">
+            <XCircleIcon
+              width={20}
+              className="text-teal-600 cursor-pointer hover:text-teal-400 transition-all"
+              onClick={() => setDialogOpen(false)}
+            />
+          </div>
           <Title className="mb-3 flex gap-2">
             <InformationCircleIcon width={24} className="text-teal-500/80" />
             Information
