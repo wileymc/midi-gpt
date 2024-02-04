@@ -45,6 +45,14 @@ export function parseCode(response: string) {
     response = response.slice(0, start) + response.slice(end + 3);
   }
 
+  if (codes.length === 0) {
+    // No code blocks found, treat the entire response as a single code block
+    codes.push({
+      key: "",
+      code: response.trim(),
+    });
+  }
+
   return codes
     .map((code) => code.code)
     .join("\n\n")

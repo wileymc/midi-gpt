@@ -133,7 +133,7 @@ export default function Home() {
         <aside className="h-full flex flex-col col-span-1 mt-10 md:mt-0 order-last md:order-first">
           <form onSubmit={handleSubmit} className="space-y-4">
             <SectionHeader
-              title="Describe a melody, chord sequence, or pattern to generate as MIDI"
+              title="Describe a melody, chord sequence, or pattern to generate"
               stepNumber={1}
             />
             <Textarea

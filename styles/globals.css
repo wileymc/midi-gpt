@@ -14,7 +14,7 @@ body {
 }
 
 .btn-primary {
-  @apply bg-teal-500 text-white py-1 px-2 rounded-full transition-all border border-teal-600 hover:border-teal-800 hover:bg-teal-600 flex justify-center gap-4 items-center z-10;
+  @apply bg-teal-600 text-white py-1 px-2 rounded-full transition-all border border-teal-400  hover:bg-teal-700 flex justify-center gap-4 items-center z-10;
 }
 
 .btn-secondary {
