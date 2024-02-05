@@ -60,7 +60,7 @@ a {
 }
 
 #player midi-player {
-  @apply bg-teal-700/50 dark:bg-teal-400/50 border border-teal-500/50 rounded-bl-lg rounded-br-lg p-1;
+  @apply bg-teal-700/50 dark:bg-teal-400/50 border-l border-r border-teal-500/50 p-1;
   display: block;
   width: inherit;
   margin: 0;

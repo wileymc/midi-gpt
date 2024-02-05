@@ -9,6 +9,12 @@ import {
   SearchSelect,
   SearchSelectItem,
   Switch,
+  TabGroup,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Flex,
 } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { ScaleLoader } from "react-spinners";
@@ -41,8 +47,8 @@ const SectionHeader = ({
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
-  const [instrumentKey, setInstrumentKey] = useState("1");
-  const [tempo, setTempo] = useState(120);
+  const [instrumentKey, setInstrumentKey] = useState<string | undefined>();
+  const [tempo, setTempo] = useState<number | undefined>();
   const [shouldLoop, setShouldLoop] = useState(false);
   const [midiFile, setMidiFile] = useState<string | null>(null);
   const [isLoading, setLoading] = useState(false);
@@ -131,103 +137,106 @@ export default function Home() {
         className={`grid grid-cols-1 md:grid-cols-3 h-full p-3 md:p-10 md:gap-10`}
       >
         <aside className="h-full flex flex-col col-span-1 mt-10 md:mt-0 order-last md:order-first">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <SectionHeader
-              title="Describe a melody, chord sequence, or pattern to generate"
-              stepNumber={1}
-            />
-            <Textarea
-              id="input"
-              name="prompt"
-              className={`min-h-24 dark:placeholder:text-dark-tremor-content-muted`}
-              placeholder="Give me a funky thumping house bassline..."
-              value={inputValue}
-              onChange={handleChange}
-              required
-              autoFocus
-            />
-            <button
-              type="submit"
-              className="btn-primary w-full"
-              disabled={isLoading}
-            >
-              <MusicalNoteIcon width={24} />
-              Generate a MIDI file
-            </button>
-            <div className="py-2">
-              <Divider />
-            </div>
-            <SectionHeader
-              title="Adjust optional MIDI parameters as needed"
-              stepNumber={2}
-            />
-            <div className="space-y-4">
-              <div>
-                <Text className="mb-1 dark:text-zinc-400">Instrument</Text>
-                <SearchSelect
-                  value={instrumentKey}
-                  onValueChange={handleInstrumentChange}
-                >
-                  {soundFontInstruments.map((instrument) => (
-                    <SearchSelectItem
-                      key={instrument.key}
-                      value={instrument.key}
-                    >
-                      {titleCase(instrument.display.replace(/_/g, " "))}
-                    </SearchSelectItem>
-                  ))}
-                </SearchSelect>
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <section className="space-y-4">
+              <SectionHeader
+                title="Describe a melody, chord sequence, or pattern to generate"
+                stepNumber={1}
+              />
+              <Textarea
+                id="input"
+                name="prompt"
+                className={`min-h-24 dark:placeholder:text-dark-tremor-content-muted`}
+                placeholder="Give me a funky thumping house bassline..."
+                value={inputValue}
+                onChange={handleChange}
+                required
+                autoFocus
+              />
+            </section>
+            <section className="space-y-4">
+              <SectionHeader
+                title="Adjust optional MIDI parameters as needed"
+                stepNumber={2}
+              />
+              <div className="space-y-4">
+                <div>
+                  <Text className="mb-1 dark:text-zinc-400">Instrument</Text>
+                  <SearchSelect
+                    value={instrumentKey}
+                    onValueChange={handleInstrumentChange}
+                  >
+                    {soundFontInstruments.map((instrument) => (
+                      <SearchSelectItem
+                        key={instrument.key}
+                        value={instrument.key}
+                      >
+                        {titleCase(instrument.display.replace(/_/g, " "))}
+                      </SearchSelectItem>
+                    ))}
+                  </SearchSelect>
+                </div>
+                <div>
+                  <Text className="mb-1 dark:text-zinc-400">Key</Text>
+                  <Select>
+                    <SelectItem value="c">C</SelectItem>
+                    <SelectItem value="c#">C#</SelectItem>
+                    <SelectItem value="d">D</SelectItem>
+                    <SelectItem value="d#">D#</SelectItem>
+                    <SelectItem value="e">E</SelectItem>
+                    <SelectItem value="f">F</SelectItem>
+                    <SelectItem value="f#">F#</SelectItem>
+                    <SelectItem value="g">G</SelectItem>
+                    <SelectItem value="g#">G#</SelectItem>
+                    <SelectItem value="a">A</SelectItem>
+                    <SelectItem value="a#">A#</SelectItem>
+                    <SelectItem value="b">B</SelectItem>
+                  </Select>
+                </div>
+                <div>
+                  <Text className="mb-1 dark:text-zinc-400">Tempo</Text>
+                  <NumberInput
+                    placeholder="120"
+                    value={tempo}
+                    onValueChange={handleTempoChange}
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <Text className="mb-1 dark:text-zinc-400">
+                    Toggle Playback Loop
+                  </Text>
+                  <Switch
+                    checked={shouldLoop}
+                    onChange={() => setShouldLoop(!shouldLoop)}
+                  />
+                </div>
               </div>
-              <div>
-                <Text className="mb-1 dark:text-zinc-400">Key</Text>
-                <Select>
-                  <SelectItem value="c">C</SelectItem>
-                  <SelectItem value="c#">C#</SelectItem>
-                  <SelectItem value="d">D</SelectItem>
-                  <SelectItem value="d#">D#</SelectItem>
-                  <SelectItem value="e">E</SelectItem>
-                  <SelectItem value="f">F</SelectItem>
-                  <SelectItem value="f#">F#</SelectItem>
-                  <SelectItem value="g">G</SelectItem>
-                  <SelectItem value="g#">G#</SelectItem>
-                  <SelectItem value="a">A</SelectItem>
-                  <SelectItem value="a#">A#</SelectItem>
-                  <SelectItem value="b">B</SelectItem>
-                </Select>
-              </div>
-              <div>
-                <Text className="mb-1 dark:text-zinc-400">Tempo</Text>
-                <NumberInput
-                  placeholder="120"
-                  defaultValue={120}
-                  onValueChange={handleTempoChange}
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <Text className="mb-1 dark:text-zinc-400">
-                  Toggle Playback Loop
-                </Text>
-                <Switch
-                  checked={shouldLoop}
-                  onChange={() => setShouldLoop(!shouldLoop)}
-                />
-              </div>
-            </div>
+              <button
+                type="submit"
+                className="btn-primary w-full"
+                disabled={isLoading}
+              >
+                <MusicalNoteIcon width={24} />
+                Generate a MIDI file
+              </button>
+            </section>
           </form>
-          <div className="py-2">
-            <Divider />
-          </div>
-          <SectionHeader title="Download your MIDI file" stepNumber={3} />
           {midiFile && (
-            <button
-              type="button"
-              className="btn-primary w-full mt-4"
-              onClick={handleDownload}
-              disabled={!midiFile}
-            >
-              <ArrowDownTrayIcon width={24} />
-              Download MIDI
-            </button>
+            <>
+              <div className="py-2">
+                <Divider />
+              </div>
+              <SectionHeader title="Download your MIDI file" stepNumber={3} />
+              <button
+                type="button"
+                className="btn-primary w-full mt-4"
+                onClick={handleDownload}
+                disabled={!midiFile}
+              >
+                <ArrowDownTrayIcon width={24} />
+                Download MIDI
+              </button>
+            </>
           )}
         </aside>
 
@@ -239,7 +248,11 @@ export default function Home() {
               {isLoading && <ScaleLoader color="#38B2AC" />}
               {!isLoading && midiFile && (
                 <section className="z-1 p-4">
-                  <MidiPreview midiFile={midiFile} shouldLoop={shouldLoop} />
+                  <MidiPreview
+                    midiFile={midiFile}
+                    shouldLoop={shouldLoop}
+                    handleDownload={handleDownload}
+                  />
                 </section>
               )}
             </div>

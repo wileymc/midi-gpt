@@ -14,7 +14,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  const { inputValue, instrumentKey = 1, tempo = 120 } = req.body;
+  const { inputValue, instrumentKey, tempo } = req.body;
   const prompt = `You are a midi composer. Given the following description, please generate a midi sequence.  
                   It is possible to play multiple notes at the same time.
                   Output the midi sequence as a single array of events in time with the FORMAT '{ pitch: ["E4", "D4"], duration: "4t", velocity: "100" }'.
@@ -59,12 +59,14 @@ export default async function handler(
 
   track.polyModeOn();
 
-  // Define an instrument (optional):
-  track.addEvent(
-    new MidiWriter.ProgramChangeEvent({ instrument: instrumentKey })
-  );
+  if (instrumentKey)
+    track.addEvent(
+      new MidiWriter.ProgramChangeEvent({ instrument: instrumentKey })
+    );
 
   track.setTempo(tempo);
+
+  track.addTrackName(slugify(inputValue));
 
   track.addEvent(events, function (event, index) {
     return { sequential: true };
@@ -75,4 +77,15 @@ export default async function handler(
   const uri = write.dataUri();
   res.setHeader("Content-Type", "application/json");
   res.status(200).json({ uri });
+}
+
+function slugify(text: string) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/[^\w-]+/g, "") // Remove all non-word chars
+    .replace(/--+/g, "-") // Replace multiple - with single -
+    .replace(/^-+/, "") // Trim - from start of text
+    .replace(/-+$/, ""); // Trim - from end of text
 }

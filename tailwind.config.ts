@@ -44,6 +44,7 @@ const config: Config = {
           content: {
             subtle: colors.zinc[400],
             DEFAULT: colors.zinc[500],
+            info: colors.zinc[800],
             emphasis: colors.zinc[700],
             strong: colors.zinc[900],
             inverted: colors.white,
@@ -52,15 +53,15 @@ const config: Config = {
         // dark mode
         "dark-tremor": {
           brand: {
-            faint: colors.zinc[900],
-            muted: colors.teal[900],
+            faint: colors.zinc[950],
+            muted: colors.teal[950],
             subtle: colors.teal[800],
             DEFAULT: colors.teal[500],
             emphasis: colors.teal[400],
             inverted: colors.teal[950],
           },
           background: {
-            muted: colors.zinc[800],
+            muted: colors.neutral[900],
             subtle: colors.zinc[800],
             DEFAULT: colors.zinc[900],
             emphasis: colors.zinc[300],
@@ -73,14 +74,14 @@ const config: Config = {
           },
           content: {
             subtle: colors.zinc[600],
-            DEFAULT: colors.zinc[300],
+            DEFAULT: colors.zinc[500],
+            info: colors.zinc[400],
             emphasis: colors.zinc[200],
             strong: colors.zinc[50],
             inverted: colors.zinc[950],
           },
         },
       },
-
       boxShadow: {
         // light
         "tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",

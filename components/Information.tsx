@@ -25,14 +25,14 @@ export default function Information() {
             Information
           </Title>
           <div>
-            <Text>
+            <Text className="dark:text-dark-tremor-content-info">
               Thanks for visiting MIDIgpt! This is a simple but powerful web app
               that leverages a ton of open source libraries and APIs to generate
               MIDI files from text prompts. It is deeply inspired by{" "}
               <a href="https://github.com/whoiskatrin/chart-gpt">ChartGPT</a>{" "}
               which is an awesome app for generating charts from text prompts.
             </Text>
-            <Text className="mt-2">
+            <Text className="mt-2 dark:text-dark-tremor-content-info">
               The MIDI concepts are generated using the GPT-3.5 model from
               OpenAI, and the MIDI files are generated using the{" "}
               <a href="https://github.com/grimmdude/MidiWriterJS">
@@ -48,17 +48,17 @@ export default function Information() {
               <a href="https://tremor.so">Tremor</a>, and is hosted on{" "}
               <a href="https://vercel.com/">Vercel</a>.
             </Text>
-            <Text className="mt-2">
+            <Text className="mt-2 dark:text-dark-tremor-content-info">
               The app is open source and the code is available on GitHub. If you
               have any questions or feedback, feel free to reach out to me on{" "}
               <a href="twitter.com/wileymckayconte">Twitter</a> or{" "}
               <a href="github.com/wileymc">GitHub</a>. Enjoy!
             </Text>
-            <Divider className="my-4" />
-            <Text>
-              I am currently working on training a proprietary model to generate
-              higher quality MIDI files from text prompts. If you are interested
-              in contributing, please{" "}
+            <Divider className="my-4 dark:text-dark-tremor-content-info" />
+            <Text className="dark:text-dark-tremor-content-info">
+              I am currently working on training and fine-tuning a proprietary
+              model to generate higher quality MIDI files from text prompts. If
+              you are interested in contributing, please{" "}
               <a href="mailto:me+midigpt@wileymc.com">get in touch with me</a>.
             </Text>
           </div>
