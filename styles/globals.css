@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --toastify-color-light: #fff !important;
+  --toastify-color-dark: #121212 !important;
+  --toastify-color-info: #38b2ac !important;
+  --toastify-color-success: #3feb8c !important;
+  --toastify-color-warning: #f8e28a !important;
+  --toastify-color-error: #e8496c !important;
+  --toastify-color-progress-dark: #38b2ac !important;
+  --toastify-color-progress-light: #38b2ac !important;
+}
+
 body {
   margin: 0;
   height: 100vh;

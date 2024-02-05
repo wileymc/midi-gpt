@@ -27,6 +27,7 @@ import Information from "@/components/Information";
 import { useCreditStore, useDialogueStore } from "@/lib/store";
 import { MidiPreview } from "@/components/MidiPreview";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { toast } from "react-toastify";
 
 const SectionHeader = ({
   stepNumber,
@@ -97,7 +98,7 @@ export default function Home() {
       localStorage.setItem("midiFile", uri);
       decrementCredits();
     } catch (error) {
-      console.error(error);
+      toast.error("Failed to generate MIDI file. Please try again.");
     } finally {
       setTimeout(() => setLoading(false), 1200);
     }
