@@ -8,7 +8,7 @@ export default function Document() {
         <meta charSet="UTF-8" />
         <meta
           property="og:title"
-          content="=MIDIgpt | Text to MIDI file generator"
+          content="MIDIgpt | Text to MIDI file generator"
         />
         <meta
           property="og:image"
