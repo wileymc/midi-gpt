@@ -129,6 +129,10 @@ export default function Home() {
     })
   );
 
+  const testToast = () => {
+    toast.error("Test toast");
+  };
+
   return (
     <>
       <Head>

@@ -15,9 +15,8 @@ export default async function handler(
   res: NextApiResponse
 ): Promise<void> {
   const { inputValue, instrumentKey, tempo } = req.body;
-  const prompt = `You are a midi composer. Given the following description, please generate a midi sequence.  
-                  It is possible to play multiple notes at the same time.
-                  Output the midi sequence as a single array of events in time with the FORMAT '{ pitch: ["E4", "D4"], duration: "4t", velocity: "100" }'.
+  const prompt = `You are a midi composer. Given the following description, please generate a midi sequence: ${inputValue}
+                  Output the midi sequence as a single array of events in time with the FORMAT '{ "pitch": ["E4", "D3"], "duration": "4t", "velocity": "100" }'.
                   Pitch values can only string notes from C0 to G10.
                   Duration values can only be: 
                   1 : whole
@@ -38,22 +37,22 @@ export default async function handler(
                   64 : sixty-fourth
                   Tn : where n is an explicit number of ticks (T128 = 1 beat)
                   Velocity values can only be between 0 and 100.
-                  Output nothing but JSON in this format, if you cannot do so respond "FAIL". Description: ${inputValue}`;
+                  Output nothing but valid JSON as described above, if you cannot complete this request, state your reason as only json like so: { error: "I cannot do that because..." }`;
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: prompt }],
-    model: "gpt-4",
+    model: "gpt-3.5-turbo-1106",
     // Consider using function call to make this more robust
   });
 
-  console.log(completion.choices[0].message.content);
+  const gptResponse = completion.choices[0].message.content as string;
+  const json = JSON.parse(parseCode(gptResponse));
 
-  const midiSequence = parseCode(
-    completion.choices[0].message.content as string
-  );
-  const parsedMidiSequence = JSON.parse(midiSequence);
-  let events = parsedMidiSequence?.map(
-    (event: MidiEvent) => new MidiWriter.NoteEvent(event)
-  );
+  if (json.error) {
+    res.status(500).json({ error: json.error });
+    return;
+  }
+
+  let events = json?.map((event: MidiEvent) => new MidiWriter.NoteEvent(event));
 
   const track = new MidiWriter.Track();
 
@@ -64,7 +63,7 @@ export default async function handler(
       new MidiWriter.ProgramChangeEvent({ instrument: instrumentKey })
     );
 
-  track.setTempo(tempo);
+  if (tempo) track.setTempo(tempo);
 
   track.addTrackName(slugify(inputValue));
 

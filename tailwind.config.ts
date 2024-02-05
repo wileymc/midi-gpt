@@ -61,7 +61,7 @@ const config: Config = {
             inverted: colors.teal[950],
           },
           background: {
-            muted: colors.neutral[900],
+            muted: colors.zinc[950],
             subtle: colors.zinc[800],
             DEFAULT: colors.zinc[900],
             emphasis: colors.zinc[300],

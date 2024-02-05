@@ -23,8 +23,6 @@ export function MidiPreview({
   shouldLoop: boolean;
   handleDownload: () => void;
 }) {
-  const { theme } = useTheme();
-
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
@@ -34,10 +32,7 @@ export function MidiPreview({
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
-      toast("Link copied to clipboard", {
-        theme: theme === "dark" ? "dark" : "light",
-        position: "bottom-center",
-      });
+      toast("Link copied to clipboard");
     }
   };
 
