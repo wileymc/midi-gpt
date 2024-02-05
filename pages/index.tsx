@@ -9,12 +9,6 @@ import {
   SearchSelect,
   SearchSelectItem,
   Switch,
-  TabGroup,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  Flex,
 } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { ScaleLoader } from "react-spinners";
@@ -28,6 +22,7 @@ import { useCreditStore, useDialogueStore } from "@/lib/store";
 import { MidiPreview } from "@/components/MidiPreview";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const SectionHeader = ({
   stepNumber,
@@ -47,6 +42,7 @@ const SectionHeader = ({
 };
 
 export default function Home() {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState("");
   const [instrumentKey, setInstrumentKey] = useState<string | undefined>();
   const [tempo, setTempo] = useState<number | undefined>();
@@ -63,11 +59,11 @@ export default function Home() {
   }));
 
   useEffect(() => {
-    let existingFile = localStorage.getItem("midiFile");
+    let existingFile = router.query.midi || localStorage.getItem("midiFile");
     if (existingFile) {
-      setMidiFile(existingFile);
+      setMidiFile(existingFile as string);
     }
-  }, []);
+  }, [router.query.midi]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -128,10 +124,6 @@ export default function Home() {
       display: value,
     })
   );
-
-  const testToast = () => {
-    toast.error("Test toast");
-  };
 
   return (
     <>

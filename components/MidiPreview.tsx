@@ -24,14 +24,15 @@ export function MidiPreview({
   handleDownload: () => void;
 }) {
   const handleShare = () => {
+    const url = `${window.location.href}?midi=${midiFile}`;
     if (navigator.share) {
       navigator.share({
         title: "MIDI Preview",
         text: "Check out this MIDI preview",
-        url: window.location.href,
+        url,
       });
     } else {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(url);
       toast("Link copied to clipboard");
     }
   };
