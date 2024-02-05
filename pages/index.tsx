@@ -131,7 +131,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>MIDIgpt | Generate MIDI files from text in seconds</title>
+        <title>MIDIgpt | Text to MIDI files in seconds</title>
       </Head>
       <div
         className={`grid grid-cols-1 md:grid-cols-3 h-full p-3 md:p-10 md:gap-10`}

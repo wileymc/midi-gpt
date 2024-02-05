@@ -6,7 +6,10 @@ export default function Document() {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="UTF-8" />
-        <meta property="og:title" content="=MIDIgpt" />
+        <meta
+          property="og:title"
+          content="=MIDIgpt | Text to MIDI file generator"
+        />
         <meta
           property="og:image"
           content="https://midigpt.xyz/midi-gpt-og.png"
@@ -25,7 +28,10 @@ export default function Document() {
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@wileymckayconte" />
-        <meta name="twitter:title" content="MIDIgpt | Text to MIDI Files" />
+        <meta
+          name="twitter:title"
+          content="MIDIgpt | Text to MIDI file generator"
+        />
         <meta
           name="twitter:description"
           content="Easily generate MIDI files from text prompts in seconds"
