@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { ScaleLoader } from "react-spinners";
 import { MusicalNoteIcon } from "@heroicons/react/24/solid";
 import soundfont from "../public/soundfont.json";
-import { titleCase } from "@/lib/strings";
+import { titleCase, urlSafeBase64Decode } from "@/lib/strings";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
 import Information from "@/components/Information";
@@ -22,7 +22,6 @@ import { useCreditStore, useDialogueStore } from "@/lib/store";
 import { MidiPreview } from "@/components/MidiPreview";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { toast } from "react-toastify";
-import { useRouter } from "next/router";
 
 const SectionHeader = ({
   stepNumber,
@@ -41,8 +40,25 @@ const SectionHeader = ({
   );
 };
 
-export default function Home() {
-  const router = useRouter();
+import { GetServerSideProps } from "next";
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { query } = context;
+  const midiQuery = query.midi as string;
+  const existingFile = midiQuery ? urlSafeBase64Decode(midiQuery) : null;
+
+  return {
+    props: {
+      existingFile: existingFile,
+    },
+  };
+};
+
+export default function Home({
+  existingFile,
+}: {
+  existingFile: string | null;
+}) {
   const [inputValue, setInputValue] = useState("");
   const [instrumentKey, setInstrumentKey] = useState<string | undefined>();
   const [tempo, setTempo] = useState<number | undefined>();
@@ -59,11 +75,11 @@ export default function Home() {
   }));
 
   useEffect(() => {
-    let existingFile = router.query.midi || localStorage.getItem("midiFile");
-    if (existingFile) {
-      setMidiFile(existingFile as string);
+    let uri = existingFile || localStorage.getItem("midiFile");
+    if (uri) {
+      setMidiFile(uri as string);
     }
-  }, [router.query.midi]);
+  }, [existingFile]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

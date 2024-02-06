@@ -4,6 +4,7 @@ import { Icon } from "@tremor/react";
 import { ArrowDownOnSquareIcon, ShareIcon } from "@heroicons/react/24/solid";
 import { toast } from "react-toastify";
 import { useTheme } from "next-themes";
+import { urlSafeBase64Encode } from "@/lib/strings";
 
 declare global {
   namespace JSX {
@@ -24,7 +25,7 @@ export function MidiPreview({
   handleDownload: () => void;
 }) {
   const handleShare = () => {
-    const url = `${window.location.href}?midi=${midiFile}`;
+    const url = `${window.location.href}?midi=${urlSafeBase64Encode(midiFile)}`;
     if (navigator.share) {
       navigator.share({
         title: "MIDI Preview",

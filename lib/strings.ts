@@ -7,3 +7,11 @@ export function titleCase(str: string): string {
     })
     .join(" ");
 }
+
+export function urlSafeBase64Encode(str: string) {
+  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+export function urlSafeBase64Decode(str: string) {
+  return atob(str.replace(/-/g, "+").replace(/_/g, "/"));
+}
