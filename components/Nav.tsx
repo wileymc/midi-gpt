@@ -2,6 +2,7 @@ import { useCreditStore, useDialogueStore } from "@/lib/store";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import { Dialog, DialogPanel, Text, Title } from "@tremor/react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import Script from "next/script";
 
 export function Nav() {
@@ -16,10 +17,11 @@ export function Nav() {
       className={`flex flex-row justify-between items-center w-full p-3 border-b h-[48px] bg-zinc-200 border-zinc-300 dark:bg-zinc-950 dark:border-zinc-700 transition-all`}
     >
       <div className={`flex gap-2 items-center`}>
-        <img
+        <Image
           src="https://www.svgrepo.com/show/217552/keyboard-piano.svg"
           alt="Keyboard Piano"
-          style={{ height: "36px" }}
+          width={36}
+          height={36}
         />
         <h3 className={`font-mono text-sm`}>
           MIDI<strong>gpt</strong>
