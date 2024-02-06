@@ -14,8 +14,8 @@ export default async function handler(
   res: NextApiResponse
 ): Promise<void> {
   const { inputValue, instrumentKey, tempo } = req.body;
-  const prompt = `You are a midi composer. Given the following description, please generate a midi sequence: ${inputValue}
-                  Output the midi sequence as a single array of events in time with the FORMAT '{ "pitch": ["E4", "D3"], "duration": "4t", "velocity": "100" }'.
+  const prompt = `You are a music composer. Given the following description, please generate a cohesive sequence of notes: ${inputValue}
+                  Output the sequence as a single array of events in time with the FORMAT '[{ "pitch": ["E4", "D3"], "duration": "T60", "velocity": "100" }, ...]'.
                   Pitch values can only string notes from C0 to G10.
                   Duration values can only be: 
                   1 : whole
@@ -35,15 +35,16 @@ export default async function handler(
                   32 : thirty-second
                   64 : sixty-fourth
                   Tn : where n is an explicit number of ticks (T128 = 1 beat)
-                  Velocity values can only be between 0 and 100.
+                  Velocity values can only be between 0 and 100.  Try to vary the duration and velocity of the notes to create a more interesting sequence. All durations should add up to to four bars of music (16 whole note beats).
                   Output nothing but valid JSON as described above, if you cannot complete this request, state your reason as only json like so: { error: "I cannot do that because..." }`;
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: prompt }],
-    model: "gpt-4",
+    model: "gpt-3.5-turbo-0125",
     // Consider using function call to make this more robust
   });
 
   const gptResponse = completion.choices[0].message.content as string;
+  console.log(gptResponse);
   const json = JSON.parse(gptResponse);
 
   if (json.error) {
@@ -65,6 +66,8 @@ export default async function handler(
   if (tempo) track.setTempo(tempo);
 
   track.addTrackName(slugify(inputValue));
+
+  track.setTempo(120);
 
   track.addEvent(events, function (event, index) {
     return { sequential: true };
