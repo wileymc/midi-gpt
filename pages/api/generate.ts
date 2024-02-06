@@ -47,7 +47,7 @@ export default async function handler(
   const json = JSON.parse(gptResponse);
 
   if (json.error) {
-    res.status(500).json({ error: json.error });
+    res.status(500).send(json.error);
     return;
   }
 

@@ -87,7 +87,8 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to generate MIDI file");
+        let error = await response.text();
+        throw new Error(error);
       }
 
       let json = await response.json();
