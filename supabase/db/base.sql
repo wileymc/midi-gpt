@@ -1,0 +1,9 @@
+BEGIN;
+
+CREATE SCHEMA internal;
+
+GRANT ALL PRIVILEGES ON SCHEMA internal TO service_role;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA internal GRANT ALL ON TABLES TO service_role;
+
+COMMIT;

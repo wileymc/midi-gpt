@@ -9,8 +9,18 @@ import { urlSafeBase64Encode } from "@/lib/strings";
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "midi-player": any;
-      "midi-visualizer": any;
+      "midi-player": {
+        src: string;
+        "sound-font": string;
+        visualizer: string;
+        loop?: boolean;
+        "data-js-focus-visible"?: boolean;
+      };
+      "midi-visualizer": {
+        type: string;
+        src: string;
+        id: string;
+      };
     }
   }
 }
@@ -45,7 +55,7 @@ export function MidiPreview({
   }, [shouldLoop]);
 
   return (
-    <div id="player">
+    <div id="player" className="drop-shadow-2xl">
       <Script
         async
         src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"

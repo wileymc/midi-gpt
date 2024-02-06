@@ -5,16 +5,25 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider, useTheme } from "next-themes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [supabaseClient] = useState(() => createPagesBrowserClient());
   return (
-    <ThemeProvider attribute="class">
-      <Analytics />
-      <Layout>
-        <Component {...pageProps} />
-        <Toaster />
-      </Layout>
-    </ThemeProvider>
+    <SessionContextProvider
+      supabaseClient={supabaseClient}
+      initialSession={pageProps.initialSession}
+    >
+      <ThemeProvider attribute="class">
+        <Analytics />
+        <Layout>
+          <Component {...pageProps} />
+          <Toaster />
+        </Layout>
+      </ThemeProvider>
+    </SessionContextProvider>
   );
 }
 

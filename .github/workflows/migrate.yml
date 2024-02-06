@@ -1,0 +1,44 @@
+name: Migrate supabase
+
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - main
+      - production
+jobs:
+  migrate-dry-run:
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    env:
+      PROJECT_ID: "atvvsojwzylcvkoetwby"
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+      - name: Link Project
+        run: supabase link --project-ref $PROJECT_ID
+      - name: Dry-Run Migrations
+        run: supabase db push --dry-run
+
+  migrate:
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    env:
+      PROJECT_ID: "atvvsojwzylcvkoetwby"
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+      - name: Link Project
+        run: supabase link --project-ref $PROJECT_ID
+      - name: Push Migrations
+        run: supabase db push

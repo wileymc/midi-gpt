@@ -4,6 +4,7 @@ import { Dialog, DialogPanel, Text, Title } from "@tremor/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Script from "next/script";
+import { Auth } from "./Auth";
 
 export function Nav() {
   const { creditsMenuOpen, setCreditsMenuOpen } = useDialogueStore((state) => ({
@@ -33,7 +34,7 @@ export function Nav() {
           onClose={(val) => setCreditsMenuOpen(val)}
           static={true}
         >
-          <DialogPanel className={`lg:max-w-[64rem]`}>
+          <DialogPanel className={`lg:max-w-[32rem]`}>
             <div className="absolute top-0 right-0 p-3">
               <XCircleIcon
                 width={20}
@@ -44,20 +45,9 @@ export function Nav() {
             <Title className="mb-3">Add credits to generate more MIDI</Title>
             <Text>
               You have <span className="text-teal-300">{creditsRemaining}</span>{" "}
-              credits remaining.
+              credits remaining. Please register or sign in to add more credits.
             </Text>
-            <div className="mt-3">
-              <Script async src="https://js.stripe.com/v3/pricing-table.js" />
-              {/* @ts-ignore */}
-              <stripe-pricing-table
-                pricing-table-id={
-                  theme === "dark"
-                    ? "prctbl_1Of7V1BDS22igUDjektIuC5m"
-                    : "prctbl_1OfrFiBDS22igUDjVPs4p0Dq"
-                }
-                publishable-key="pk_live_51Of6RkBDS22igUDjuGhhLqxihN37zQn3G4FCXpcy8z1z9WnPjVPvPGKo8DscXAF9BQ9EadMj6f9555VvumHrVLfA0088T8vn7Y"
-              />
-            </div>
+            <Auth />
           </DialogPanel>
         </Dialog>
         <div className="flex justify-end items-center gap-2">
