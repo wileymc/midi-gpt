@@ -74,6 +74,8 @@ export default function Home() {
     }
 
     setLoading(true);
+    // scroll to top for mobile phones
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     try {
       const response = await fetch("/api/generate", {
@@ -94,7 +96,7 @@ export default function Home() {
       localStorage.setItem("midiFile", uri);
       decrementCredits();
     } catch (error) {
-      toast.error("Failed to generate MIDI file. Please try again.");
+      toast.error(`Failed to generate MIDI file: ${error}`);
     } finally {
       setTimeout(() => setLoading(false), 1200);
     }

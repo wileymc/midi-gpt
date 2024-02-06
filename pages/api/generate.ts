@@ -1,7 +1,6 @@
 import MidiWriter from "midi-writer-js";
 import OpenAI from "openai";
 import { NextApiRequest, NextApiResponse } from "next";
-import { parseCode } from "@/lib/strings";
 
 const openai = new OpenAI();
 
