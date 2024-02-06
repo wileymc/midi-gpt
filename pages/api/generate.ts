@@ -40,12 +40,12 @@ export default async function handler(
                   Output nothing but valid JSON as described above, if you cannot complete this request, state your reason as only json like so: { error: "I cannot do that because..." }`;
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: prompt }],
-    model: "gpt-3.5-turbo-1106",
+    model: "gpt-4",
     // Consider using function call to make this more robust
   });
 
   const gptResponse = completion.choices[0].message.content as string;
-  const json = JSON.parse(parseCode(gptResponse));
+  const json = JSON.parse(gptResponse);
 
   if (json.error) {
     res.status(500).json({ error: json.error });
