@@ -1,15 +1,20 @@
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { TextInput } from "@tremor/react";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
 export function Auth({
+  handleClose,
   protectedChildren,
 }: {
+  handleClose: () => void;
   protectedChildren?: React.ReactNode;
 }) {
+  const router = useRouter();
   const supabase = useSupabaseClient();
   const user = useUser();
+
+  console.log(user);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,7 +33,9 @@ export function Auth({
     }
 
     if (data) {
-      toast.success("Check your email for the confirmation link");
+      handleClose();
+      toast.success("Welcome to MIDIgpt!");
+      router.reload();
     }
   };
 

@@ -8,15 +8,17 @@ create table "public"."profile" (
 );
 
 
-CREATE UNIQUE INDEX profile_email_key ON public.profile USING btree (email);
+create unique index profile_email_key on public.profile using btree (email);
 
-CREATE UNIQUE INDEX profile_pkey ON public.profile USING btree (user_id);
+create unique index profile_pkey on public.profile using btree (user_id);
 
-alter table "public"."profile" add constraint "profile_pkey" PRIMARY KEY using index "profile_pkey";
+alter table "public"."profile" add constraint "profile_pkey" primary key using index "profile_pkey";
 
-alter table "public"."profile" add constraint "profile_email_key" UNIQUE using index "profile_email_key";
+alter table "public"."profile" add constraint "profile_email_key" unique using index "profile_email_key";
 
-alter table "public"."profile" add constraint "profile_user_id_fkey" FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE CASCADE ON DELETE CASCADE not valid;
+alter table "public"."profile" add constraint "profile_user_id_fkey" foreign key (
+    user_id
+) references auth.users (id) on update cascade on delete cascade not valid;
 
 alter table "public"."profile" validate constraint "profile_user_id_fkey";
 
@@ -67,25 +69,20 @@ create schema if not exists "internal";
 
 set check_function_bodies = off;
 
-CREATE OR REPLACE FUNCTION internal.create_profile_from_user()
- RETURNS trigger
- LANGUAGE plpgsql
- SECURITY DEFINER
-AS $function$
+create or replace function internal.create_profile_from_user()
+returns trigger
+language plpgsql
+security definer
+as $function$
 BEGIN
   INSERT INTO public.profile (
     user_id,
-    email,
-    confirmed_at
+    email
   )
   VALUES (
     NEW.id,
-    NEW.email,
-    NEW.confirmed_at
+    NEW.email
   );
   RETURN NEW;
 END;
-$function$
-;
-
-
+$function$;

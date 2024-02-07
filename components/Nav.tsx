@@ -47,7 +47,7 @@ export function Nav() {
               You have <span className="text-teal-300">{creditsRemaining}</span>{" "}
               credits remaining. Please register or sign in to add more credits.
             </Text>
-            <Auth />
+            <Auth handleClose={() => setCreditsMenuOpen(false)} />
           </DialogPanel>
         </Dialog>
         <div className="flex justify-end items-center gap-2">
