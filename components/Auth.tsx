@@ -33,9 +33,9 @@ export function Auth({
     }
 
     if (data) {
-      handleClose();
-      toast.success("Welcome to MIDIgpt!");
+      // handleClose();
       router.reload();
+      toast.success("Welcome to MIDIgpt!");
     }
   };
 
