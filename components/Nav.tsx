@@ -4,7 +4,6 @@ import { Dialog, DialogPanel, Text, Title } from "@tremor/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Script from "next/script";
-import { Auth } from "./Auth";
 
 export function Nav() {
   const { creditsMenuOpen, setCreditsMenuOpen } = useDialogueStore((state) => ({
@@ -47,8 +46,12 @@ export function Nav() {
               You have <span className="text-teal-300">{creditsRemaining}</span>{" "}
               credits remaining. Please register or sign in to add more credits.
             </Text>
-            <small>Coming soon...</small>
-            {/* <Auth handleClose={() => setCreditsMenuOpen(false)} /> */}
+            <Script async src="https://js.stripe.com/v3/pricing-table.js" />
+            {/* @ts-ignore */}
+            <stripe-pricing-table
+              pricing-table-id="prctbl_1Of7V1BDS22igUDjektIuC5m"
+              publishable-key="pk_live_51Of6RkBDS22igUDjuGhhLqxihN37zQn3G4FCXpcy8z1z9WnPjVPvPGKo8DscXAF9BQ9EadMj6f9555VvumHrVLfA0088T8vn7Y"
+            />
           </DialogPanel>
         </Dialog>
         <div className="flex justify-end items-center gap-2">
