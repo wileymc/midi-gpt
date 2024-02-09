@@ -44,7 +44,7 @@ export function Nav() {
             <Title className="mb-3">Add credits to generate more MIDI</Title>
             <Text>
               You have <span className="text-teal-300">{creditsRemaining}</span>{" "}
-              credits remaining. Please register or sign in to add more credits.
+              credits remaining. Please purchase more credits below:
             </Text>
             <Script async src="https://js.stripe.com/v3/pricing-table.js" />
             {/* @ts-ignore */}
