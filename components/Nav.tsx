@@ -1,9 +1,9 @@
 import { useCreditStore, useDialogueStore } from "@/lib/store";
-import { XCircleIcon } from "@heroicons/react/24/solid";
-import { Dialog, DialogPanel, Text, Title } from "@tremor/react";
+import { CheckBadgeIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import { Dialog, DialogPanel, Flex, Text, Title } from "@tremor/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import Script from "next/script";
+import { Divider, List, ListItem } from "@tremor/react";
 
 export function Nav() {
   const { creditsMenuOpen, setCreditsMenuOpen } = useDialogueStore((state) => ({
@@ -33,7 +33,7 @@ export function Nav() {
           onClose={(val) => setCreditsMenuOpen(val)}
           static={true}
         >
-          <DialogPanel className={`lg:max-w-[32rem]`}>
+          <DialogPanel className={`md:max-w-[64rem]`}>
             <div className="absolute top-0 right-0 p-3">
               <XCircleIcon
                 width={20}
@@ -46,12 +46,8 @@ export function Nav() {
               You have <span className="text-teal-300">{creditsRemaining}</span>{" "}
               credits remaining. Please purchase more credits below:
             </Text>
-            <Script async src="https://js.stripe.com/v3/pricing-table.js" />
-            {/* @ts-ignore */}
-            <stripe-pricing-table
-              pricing-table-id="prctbl_1Of7V1BDS22igUDjektIuC5m"
-              publishable-key="pk_live_51Of6RkBDS22igUDjuGhhLqxihN37zQn3G4FCXpcy8z1z9WnPjVPvPGKo8DscXAF9BQ9EadMj6f9555VvumHrVLfA0088T8vn7Y"
-            />
+            <Divider className="my-4" />
+            <PricingSection />
           </DialogPanel>
         </Dialog>
         <div className="flex justify-end items-center gap-2">
@@ -69,5 +65,104 @@ export function Nav() {
         </div>
       </div>
     </nav>
+  );
+}
+
+function PricingSection() {
+  return (
+    <>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="rounded-tremor-default border border-tremor-border bg-tremor-background-muted p-6 dark:border-dark-tremor-border dark:bg-dark-tremor-background-muted">
+          <div className="flex items-start justify-between space-x-6">
+            <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong text-tremor-metric">
+              <span className="text-tremor-brand">10</span> Credits
+            </h3>
+            <p className="flex items-baseline">
+              <span className="text-tremor-metric font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                $5
+              </span>
+            </p>
+          </div>
+          <Divider />
+          <div className="flex items-center justify-center">
+            <Image
+              src="/strat.png"
+              alt="Keyboard Piano"
+              width={300}
+              height={300}
+              style={{
+                borderRadius: "5px",
+              }}
+            />
+          </div>
+          <a
+            href="https://buy.stripe.com/8wMcQJaVhgzv796bIK"
+            className="block w-full whitespace-nowrap mt-8 rounded-tremor-small bg-tremor-brand py-2.5 text-center text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
+          >
+            Buy
+          </a>
+        </div>
+        <div className="rounded-tremor-default border border-tremor-border bg-tremor-background-muted p-6 dark:border-dark-tremor-border dark:bg-dark-tremor-background-muted">
+          <div className="flex items-start justify-between space-x-6">
+            <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong text-tremor-metric">
+              <span className="text-tremor-brand">50</span> Credits
+            </h3>
+            <p className="flex items-baseline">
+              <span className="text-tremor-metric font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                $20
+              </span>
+            </p>
+          </div>
+          <Divider />
+          <div className="flex items-center justify-center">
+            <Image
+              src="/kit.jpeg"
+              alt="Keyboard Piano"
+              width={300}
+              height={300}
+              style={{
+                borderRadius: "5px",
+              }}
+            />
+          </div>
+          <a
+            href="https://buy.stripe.com/14k8At6F10Axbpm289"
+            className="block w-full whitespace-nowrap mt-8 rounded-tremor-small bg-tremor-brand py-2.5 text-center text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
+          >
+            Buy
+          </a>
+        </div>
+        <div className="rounded-tremor-default border border-tremor-border bg-tremor-background-muted p-6 dark:border-dark-tremor-border dark:bg-dark-tremor-background-muted">
+          <div className="flex items-start justify-between space-x-6">
+            <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong text-tremor-metric">
+              <span className="text-tremor-brand">250</span> Credits
+            </h3>
+            <p className="flex items-baseline">
+              <span className="text-tremor-metric font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                $80
+              </span>
+            </p>
+          </div>
+          <Divider />
+          <div className="flex items-center justify-center">
+            <Image
+              src="/moog.png"
+              alt="Keyboard Piano"
+              width={300}
+              height={300}
+              style={{
+                borderRadius: "5px",
+              }}
+            />
+          </div>
+          <a
+            href="https://buy.stripe.com/fZe8At1kH6YVfFC288"
+            className="block w-full whitespace-nowrap mt-8 rounded-tremor-small bg-tremor-brand py-2.5 text-center text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
+          >
+            Buy
+          </a>
+        </div>
+      </div>
+    </>
   );
 }
