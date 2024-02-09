@@ -51,11 +51,7 @@ export default async function webhookHandler(
     switch (event.type) {
       case "charge.succeeded":
         const charge = event.data.object as Stripe.Charge;
-        console.log(`💵 Charge id: ${charge.id}`);
-
         const userEmail = charge.billing_details.email as string;
-
-        // credit_amount follows SQL naming convention in this case to comply with Supabase Stored Procedures
         let credits = 0;
 
         // @ts-ignore
