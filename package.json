@@ -20,6 +20,7 @@
     "@supabase/supabase-js": "^2.39.3",
     "@tremor/react": "^3.13.4",
     "@vercel/analytics": "^1.1.2",
+    "@vercel/speed-insights": "^1.0.9",
     "micro": "^10.0.1",
     "midi-writer-js": "^3.1.1",
     "next": "14.1.0",

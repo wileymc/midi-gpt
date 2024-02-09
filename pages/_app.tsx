@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() => createPagesBrowserClient());
@@ -16,8 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
+      <Analytics />
+      <SpeedInsights />
       <ThemeProvider attribute="class">
-        <Analytics />
         <Layout>
           <Component {...pageProps} />
           <Toaster />
