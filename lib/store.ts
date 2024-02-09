@@ -27,9 +27,15 @@ export const useCreditStore = create<CreditStore>()(
 interface DialogueStore {
   creditsMenuOpen: boolean;
   setCreditsMenuOpen: (open: boolean) => void;
+  redeemMenuOpen: boolean;
+  setRedeemMenuOpen: (open: boolean) => void;
 }
 
 export const useDialogueStore = create<DialogueStore>((set) => ({
   creditsMenuOpen: false,
-  setCreditsMenuOpen: (open: boolean) => set({ creditsMenuOpen: open }),
+  setCreditsMenuOpen: (open: boolean) =>
+    set({ creditsMenuOpen: open, redeemMenuOpen: false }),
+  redeemMenuOpen: false,
+  setRedeemMenuOpen: (open: boolean) =>
+    set({ redeemMenuOpen: open, creditsMenuOpen: false }),
 }));
