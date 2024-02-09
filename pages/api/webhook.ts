@@ -3,6 +3,9 @@ import Stripe from "stripe";
 import { supabase } from "../../lib/supabase";
 import { buffer } from "micro";
 import { RandomWordOptions, generateSlug } from "random-word-slugs";
+import { Resend } from "resend";
+import { Email } from "@/components/Email";
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const randomWordOptions: RandomWordOptions<4> = {
   format: "title",
@@ -50,9 +53,8 @@ export default async function webhookHandler(
         const charge = event.data.object as Stripe.Charge;
         console.log(`💵 Charge id: ${charge.id}`);
 
-        const userEmail = charge.billing_details.email;
+        const userEmail = charge.billing_details.email as string;
 
-        console.log(charge.billing_details);
         // credit_amount follows SQL naming convention in this case to comply with Supabase Stored Procedures
         let credits = 0;
 
@@ -79,6 +81,14 @@ export default async function webhookHandler(
           ])
           .select();
 
+        if (userEmail)
+          resend.emails.send({
+            from: "onboarding@resend.dev",
+            to: userEmail,
+            subject: "Your MIDIgpt Credits! 🎉",
+            react: Email({ code: insertCodeData?.[0].code, credits }),
+          });
+
         await supabase.from("transactions").insert([
           {
             user_email: userEmail,
@@ -87,6 +97,7 @@ export default async function webhookHandler(
             amount: charge.amount,
           },
         ]);
+
         break;
       case "payment_intent.payment_failed":
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
