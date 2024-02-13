@@ -45,6 +45,7 @@ export default function Document() {
           content="midi, gpt, ai, audio, file generation, music, midi tools, ai midi, ai audio, ai music"
         />
         <meta name="robots" content="index, follow" />
+        <link rel="preload" href="/studio-bg.webp" as="image" />
       </Head>
       <body>
         <Main />
